@@ -11,7 +11,6 @@ class ExperienceSection extends StatelessWidget {
     final controller = context.watch<HomeController>();
 
     return Container(
-      key: key,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 100),
       child: Column(
@@ -19,41 +18,47 @@ class ExperienceSection extends StatelessWidget {
         children: [
           FadeInUp(
             duration: const Duration(milliseconds: 600),
-            child: ShaderMask(
-              shaderCallback: (bounds) => const LinearGradient(
-                colors: [
-                  Color(0xFF9B59B6),
-                  Color(0xFFE91E8C),
-                ],
-              ).createShader(bounds),
-              child: const Text(
-                "Experiência Profissional",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+            child: const Text(
+              "Experiência Profissional",
+              style: TextStyle(
+                fontSize: 38,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
               ),
             ),
           ),
+          const SizedBox(height: 16),
+          const Text(
+            "Minha trajetória em desenvolvimento mobile, front-end, UI/UX e tecnologia aplicada.",
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.6,
+              color: Colors.white60,
+            ),
+          ),
+          const SizedBox(height: 50),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isMobile = constraints.maxWidth < 800;
 
-          const SizedBox(height: 80),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.experiences.length,
-            itemBuilder: (context, index) {
-              final experience = controller.experiences[index];
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.experiences.length,
+                itemBuilder: (context, index) {
+                  final experience = controller.experiences[index];
 
-              return FadeInUp(
-                duration: Duration(milliseconds: 600 + (index * 150)),
-                child: _TimelineItem(
-                  isLast: index == controller.experiences.length - 1,
-                  company: experience.company,
-                  role: experience.role,
-                  period: experience.period,
-                  description: experience.description,
-                ),
+                  return FadeInUp(
+                    duration: Duration(milliseconds: 500 + (index * 100)),
+                    child: _ExperienceCard(
+                      index: index + 1,
+                      company: experience.company,
+                      role: experience.role,
+                      period: experience.period,
+                      description: experience.description,
+                    ),
+                  );
+                },
               );
             },
           ),
@@ -63,15 +68,15 @@ class ExperienceSection extends StatelessWidget {
   }
 }
 
-class _TimelineItem extends StatelessWidget {
-  final bool isLast;
+class _ExperienceCard extends StatelessWidget {
+  final int index;
   final String company;
   final String role;
   final String period;
   final String description;
 
-  const _TimelineItem({
-    required this.isLast,
+  const _ExperienceCard({
+    required this.index,
     required this.company,
     required this.role,
     required this.period,
@@ -80,94 +85,54 @@ class _TimelineItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Column(
-          children: [
-            Container(
-              width: 16,
-              height: 16,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF9B59B6),
-                    Color(0xFFE91E8C),
-                  ],
-                ),
-              ),
-            ),
-            if (!isLast)
-              Container(
-                width: 2,
-                height: 140,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF9B59B6),
-                      Color(0xFFE91E8C),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
-          ],
-        ),
+    final number = index.toString().padLeft(2, "0");
 
-        const SizedBox(width: 30),
-        Expanded(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 60),
-            padding: const EdgeInsets.all(25),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1A1A2E),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF9B59B6).withOpacity(0.2),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                )
-              ],
+    return Container(
+      margin: const EdgeInsets.only(bottom: 22),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: const Color(0xFF151528),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white.withOpacity(0.08)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            number,
+            style: TextStyle(
+              fontSize: 34,
+              fontWeight: FontWeight.w900,
+              color: Colors.white.withOpacity(0.12),
             ),
+          ),
+          const SizedBox(width: 26),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   company,
                   style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
                 ),
-
                 const SizedBox(height: 6),
                 Text(
                   role,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     color: Color(0xFFE91E8C),
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-
-                const SizedBox(height: 6),
-                Text(
-                  period,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white54,
-                  ),
-                ),
-
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
                 Text(
                   description,
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 14.5,
                     height: 1.6,
                     color: Colors.white70,
                   ),
@@ -175,8 +140,24 @@ class _TimelineItem extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ],
+          const SizedBox(width: 18),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE91E8C).withOpacity(0.12),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              period,
+              style: const TextStyle(
+                fontSize: 13,
+                color: Color(0xFFFF8BCB),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

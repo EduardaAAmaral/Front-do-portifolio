@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_portifolio/models/education_model.dart';
 import 'package:flutter_portifolio/models/experience_model.dart';
 import 'package:flutter_portifolio/models/project_model.dart';
@@ -10,17 +8,17 @@ class PortfolioData {
   static const String role = "Flutter Developer | Mobile Developer";
   static const String location = "Rio Grande - RS";
   static const String email = "eduardaalvesamaral@gmail.com";
-  static const String github = "https://github.com/SEU_GITHUB";
-  static const String linkedin = "https://linkedin.com/in/SEU_LINKEDIN";
+  static const String github = "https://github.com/EduardaAAmaral";
+  static const String linkedin = "https://www.linkedin.com/in/eduardaaamaral";
   static const String phone = "(53) 99956-0061";
 
   static const String summary =
-      "Desenvolvedora Mobile com foco em Flutter (Dart), "
-      "especializada na construção de aplicações cross-platform "
-      "com interfaces modernas e responsivas. Experiência em UI/UX, "
-      "integração com APIs REST e Clean Architecture.";
+      "Desenvolvedora Mobile Flutter com +3 anos de experiência em desenvolvimento "
+      "mobile e front-end. Atuação com Flutter, Dart, Clean Architecture, Firebase, "
+      "APIs REST, UI/UX e testes. Mais de 10 projetos entregues entre aplicações "
+      "mobile e sistemas web, com foco em performance, usabilidade e interfaces "
+      "responsivas.";
 
-  
   static final List<Skill> skills = [
     Skill(name: "Flutter", level: 0.9, icon: "📱"),
     Skill(name: "Dart", level: 0.9, icon: "🎯"),
@@ -34,16 +32,26 @@ class PortfolioData {
     Skill(name: "Figma", level: 0.7, icon: "🎨"),
     Skill(name: "React Native", level: 0.65, icon: "⚛️"),
     Skill(name: "JavaScript", level: 0.7, icon: "💛"),
+    Skill(name: "TDD", level: 0.7, icon: "🧪"),
+    Skill(name: "Scrum", level: 0.8, icon: "🔄"),
+    Skill(name: "Flutter DevTools", level: 0.75, icon: "🛠️"),
+    Skill(name: "Java", level: 0.65, icon: "☕"),
+    Skill(name: "Markdown", level: 0.75, icon: "📝"),
+    Skill(name: "UI/UX", level: 0.8, icon: "🎨"),
   ];
 
-  
+  static const List<String> languages = [
+    "Português — Nativo",
+    "Inglês — Intermediário",
+    "Espanhol — Básico",
+  ];
+
   static final List<Experience> experiences = [
     Experience(
       company: "Deep Pixel",
       role: "Estagiária Front-End",
       period: "Mai 2024 — Mar 2026",
-      description:
-          "Desenvolvimento de interfaces responsivas com foco em UX. "
+      description: "Desenvolvimento de interfaces responsivas com foco em UX. "
           "Criação de protótipos no Figma, integração com APIs REST, "
           "testes automatizados (QA) e documentação técnica.",
     ),
@@ -77,17 +85,42 @@ class PortfolioData {
       description:
           "Projeto de inclusão de calouros em lógica de programação e desenvolvimento de materiais educativos.",
     ),
+    Experience(
+      company: "Ebserh",
+      role: "Bolsista",
+      period: "Fev 2023 — Fev 2024",
+      description:
+          "Atuação em pesquisa clínica e tecnologia aplicada à saúde, com levantamento "
+          "de requisitos, testes de usabilidade, validação de dados e apoio à evolução "
+          "de aplicativo voltado à avaliação de feridas.",
+    ),
+    Experience(
+      company: "Universidade Federal do Rio Grande - FURG",
+      role: "Bolsista Combi-lab C3",
+      period: "Mar 2024 — Mai 2024",
+      description:
+          "Execução de simulações computacionais, organização de bases científicas, "
+          "processamento de dados e documentação técnica em projetos de bioinformática.",
+    ),
   ];
 
- 
   static final List<Project> projects = [
     Project(
       title: "Plataforma de Validação de Vendas",
-      description:
-          "App mobile com Flutter (Dart), navegação estruturada, "
+      description: "App mobile com Flutter (Dart), navegação estruturada, "
           "gerenciamento de estado, Firebase e APIs REST.",
       link: "https://github.com/SEU_GITHUB",
       tech: ["Flutter", "Firebase", "REST API"],
+      image: "assets/images/imagem.jpg",
+    ),
+    Project(
+      title: "Aplicativo de Saúde Feminina",
+      description:
+          "Aplicação mobile e dashboard web desenvolvidos com Flutter e Dart, "
+          "com foco em acessibilidade, usabilidade, persistência local e integração com APIs.",
+      link: "https://github.com/EduardaAAmaral",
+      tech: ["Flutter", "Dart", "REST API", "UI/UX"],
+      image: "assets/images/imagem.jpg",
     ),
     Project(
       title: "Cardápio Digital",
@@ -95,13 +128,14 @@ class PortfolioData {
           "Aplicação web interativa com JavaScript e renderização dinâmica.",
       link: "https://github.com/SEU_GITHUB",
       tech: ["JavaScript", "HTML", "CSS"],
+      image: "assets/images/imagem.jpg",
     ),
     Project(
       title: "Chat Interativo",
-      description:
-          "Chat em tempo real com comunicação assíncrona.",
+      description: "Chat em tempo real com comunicação assíncrona.",
       link: "https://github.com/SEU_GITHUB",
       tech: ["JavaScript", "WebSocket"],
+      image: "assets/images/imagem.jpg",
     ),
     Project(
       title: "Aplicativo de Pedidos",
@@ -109,10 +143,10 @@ class PortfolioData {
           "Aplicativo mobile com React Native e navegação entre telas.",
       link: "https://github.com/SEU_GITHUB",
       tech: ["React Native", "JavaScript"],
+      image: "assets/images/imagem.jpg",
     ),
   ];
 
-  
   static final List<Education> education = [
     Education(
       degree: "Mestrado em Engenharia de Computação",
@@ -126,7 +160,6 @@ class PortfolioData {
     ),
   ];
 
-  
   static const List<String> softSkills = [
     "Trabalho em equipe",
     "Comunicação",

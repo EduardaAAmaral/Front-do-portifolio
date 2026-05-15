@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portifolio/controllers/data/portifolio_data.dart';
+import 'package:flutter_portifolio/models/skill_model.dart';
+import 'package:flutter_portifolio/models/experience_model.dart';
+import 'package:flutter_portifolio/models/project_model.dart';
+import 'package:flutter_portifolio/models/education_model.dart';
 
 class HomeController extends ChangeNotifier {
   final ScrollController scrollController = ScrollController();
 
-  // Keys das seções
   final GlobalKey headerKey = GlobalKey();
   final GlobalKey skillsKey = GlobalKey();
   final GlobalKey experienceKey = GlobalKey();
@@ -32,7 +35,7 @@ class HomeController extends ChangeNotifier {
   }
 
   // =============================
-  // DADOS VINDO DO PORTFOLIO DATA
+  // DADOS TIPADOS ✅
   // =============================
 
   String get name => PortfolioData.name;
@@ -43,11 +46,12 @@ class HomeController extends ChangeNotifier {
   String get linkedin => PortfolioData.linkedin;
   String get summary => PortfolioData.summary;
 
-  get skills => PortfolioData.skills;
-  get experiences => PortfolioData.experiences;
-  get projects => PortfolioData.projects;
-  get education => PortfolioData.education;
-  get softSkills => PortfolioData.softSkills;
+  List<String> get languages => PortfolioData.languages;
+  List<Skill> get skills => PortfolioData.skills;
+  List<Experience> get experiences => PortfolioData.experiences;
+  List<Project> get projects => PortfolioData.projects;
+  List<Education> get education => PortfolioData.education;
+  List<String> get softSkills => PortfolioData.softSkills;
 
   @override
   void dispose() {

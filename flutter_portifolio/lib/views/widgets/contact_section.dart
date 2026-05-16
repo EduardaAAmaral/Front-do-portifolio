@@ -12,7 +12,6 @@ class ContactSection extends StatelessWidget {
     final controller = context.watch<HomeController>();
 
     return Container(
-      key: key,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 120),
       child: Column(
@@ -66,7 +65,7 @@ class ContactSection extends StatelessWidget {
               _ContactButton(
                 icon: Icons.mail,
                 text: "Email",
-                onTap: () => _launch("mailto:${controller.email}"),
+                onTap: () => _launch("https://mail.google.com/mail/?view=cm&fs=1&to=${controller.email}"),
               ),
               _ContactButton(
                 icon: Icons.code,
@@ -82,7 +81,7 @@ class ContactSection extends StatelessWidget {
                 icon: Icons.download,
                 text: "Baixar CV",
                 onTap: () => _launch(
-                    "https://SEU_LINK_PARA_CURRICULO_PDF.com"),
+                    "assets/images/CV-Eduarda-Alves-Desenvolvedora-Flutter.pdf"),
               ),
             ],
           ),

@@ -67,7 +67,7 @@ class _SideMenu extends StatelessWidget {
     ];
 
     return Container(
-      width: 70,
+      width: 76,
       height: double.infinity,
       decoration: const BoxDecoration(
         color: Color(0xFF111111),
@@ -78,47 +78,66 @@ class _SideMenu extends StatelessWidget {
           ),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(menuItems.length, (index) {
-          final isActive = controller.activeMenu == index;
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Column(
+            children: [
+              const Icon(
+                Icons.auto_awesome_rounded,
+                color: Color(0xFFE91E8C),
+                size: 26,
+              ),
+              const Spacer(),
+              Column(
+                children: List.generate(menuItems.length, (index) {
+                  final isActive = controller.activeMenu == index;
 
-          return GestureDetector(
-            onTap: () {
-              controller.setActiveMenu(index);
-              controller.scrollToSection(sectionKeys[index]);
-            },
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: isActive
-                    ? const LinearGradient(
-                        colors: [
-                          Color(0xFF9B59B6),
-                          Color(0xFFE91E8C),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      )
-                    : null,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 7),
+                    child: Tooltip(
+                      message: menuItems[index]["label"] as String,
+                      preferBelow: false,
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.setActiveMenu(index);
+                          controller.scrollToSection(sectionKeys[index]);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            gradient: isActive
+                                ? const LinearGradient(
+                                    colors: [
+                                      Color(0xFF9B59B6),
+                                      Color(0xFFE91E8C),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  )
+                                : null,
+                          ),
+                          child: Icon(
+                            menuItems[index]["icon"] as IconData,
+                            color: isActive
+                                ? Colors.white
+                                : const Color(0xFF8892A4),
+                            size: 22,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
-              child: Tooltip(
-                message: menuItems[index]["label"] as String,
-                preferBelow: false,
-                child: Icon(
-                  menuItems[index]["icon"] as IconData,
-                  color: isActive
-                      ? Colors.white
-                      : const Color(0xFF8892A4),
-                  size: 22,
-                ),
-              ),
-            ),
-          );
-        }),
+              const Spacer(),
+              const SizedBox(height: 26),
+            ],
+          ),
+        ),
       ),
     );
   }

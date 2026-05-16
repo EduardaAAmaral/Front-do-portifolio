@@ -109,41 +109,76 @@ class PortfolioData {
       title: "Plataforma de Validação de Vendas",
       description: "App mobile com Flutter (Dart), navegação estruturada, "
           "gerenciamento de estado, Firebase e APIs REST.",
-      link: "https://github.com/SEU_GITHUB",
+      link: "https://github.com/Grupo3-Kasa-Obra/front_end",
       tech: ["Flutter", "Firebase", "REST API"],
-      image: "assets/images/imagem.jpg",
+      image: "assets/images/kasa.png",
     ),
     Project(
       title: "Aplicativo de Saúde Feminina",
       description:
           "Aplicação mobile e dashboard web desenvolvidos com Flutter e Dart, "
           "com foco em acessibilidade, usabilidade, persistência local e integração com APIs.",
-      link: "https://github.com/EduardaAAmaral",
+      link:
+          "https://play.google.com/store/apps/details?id=com.raquelmenopausa.raquelapp",
       tech: ["Flutter", "Dart", "REST API", "UI/UX"],
-      image: "assets/images/imagem.jpg",
+      image: "assets/images/saudedamulher.jpeg",
     ),
     Project(
       title: "Cardápio Digital",
       description:
           "Aplicação web interativa com JavaScript e renderização dinâmica.",
-      link: "https://github.com/SEU_GITHUB",
+      link: "https://github.com/EduardaAAmaral/Cardapio-Digital",
       tech: ["JavaScript", "HTML", "CSS"],
-      image: "assets/images/imagem.jpg",
+      image: "assets/images/cardapiodigital.png",
     ),
     Project(
       title: "Chat Interativo",
       description: "Chat em tempo real com comunicação assíncrona.",
-      link: "https://github.com/SEU_GITHUB",
+      link: "https://github.com/EduardaAAmaral/Chat-Interativo",
       tech: ["JavaScript", "WebSocket"],
-      image: "assets/images/imagem.jpg",
+      image: "assets/images/chatInterativo.png",
     ),
     Project(
       title: "Aplicativo de Pedidos",
       description:
           "Aplicativo mobile com React Native e navegação entre telas.",
-      link: "https://github.com/SEU_GITHUB",
+      link: "https://github.com/EduardaAAmaral/App-de-pedidos",
       tech: ["React Native", "JavaScript"],
-      image: "assets/images/imagem.jpg",
+      image: "assets/images/appdePedido.png",
+    ),
+    Project(
+      title: "Mapa Interativo",
+      description:
+          "Sistema web interativo com mapa em tempo real utilizando Leaflet.js, "
+          "marcação dinâmica de pontos, autenticação de usuários e gerenciamento "
+          "de localizações personalizadas.",
+      link: "https://github.com/EduardaAAmaral/Mapa-interativo_eduarda-amaral",
+      tech: [
+        "JavaScript",
+        "Leaflet.js",
+        "HTML",
+        "CSS",
+        "OpenStreetMap",
+      ],
+      image: "assets/images/mapaInterativo.png",
+    ),
+    Project(
+      title: "Audio Book",
+      description:
+          "Aplicativo mobile para leitura de livros em áudio, desenvolvido com JavaScript, HTML e CSS, "
+          "com foco em acessibilidade, usabilidade e experiência do usuário.",
+      link: "https://github.com/EduardaAAmaral/AudioBook",
+      tech: ["JavaScript", "HTML", "CSS"],
+      image: "assets/images/audiobook.png",
+    ),
+    Project(
+      title: "Urna Eletrônica",
+      description:
+          "Simulador de urna eletrônica com Python, utilizando o pacotegraphics, "
+          "o promeiro projeto desenvolvido durante a graduação, com foco em lógica de programação, ",
+      link: "https://github.com/EduardaAAmaral/Urna-Eleitoral",
+      tech: ["Python"],
+      image: "assets/images/urnaeleitoral.png",
     ),
   ];
 
@@ -166,5 +201,8 @@ class PortfolioData {
     "Organização",
     "Proatividade",
     "Resolução de problemas",
+    "Aprendizado rápido",
+    "Pensamento analítico",
+    "Adaptabilidade",
   ];
 }

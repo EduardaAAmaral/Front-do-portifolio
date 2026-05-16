@@ -13,7 +13,6 @@ class HeaderSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Container(
-      key: key,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 120),
       child: width > 900
@@ -57,9 +56,7 @@ class HeaderSection extends StatelessWidget {
               ),
             ),
           ),
-
           const SizedBox(height: 12),
-
           Text(
             controller.role,
             style: const TextStyle(
@@ -67,9 +64,7 @@ class HeaderSection extends StatelessWidget {
               color: Color(0xFF8892A4),
             ),
           ),
-
           const SizedBox(height: 30),
-
           Text(
             controller.summary,
             style: const TextStyle(
@@ -78,9 +73,7 @@ class HeaderSection extends StatelessWidget {
               color: Colors.white70,
             ),
           ),
-
           const SizedBox(height: 40),
-
           Row(
             children: [
               _GradientButton(
@@ -98,7 +91,8 @@ class HeaderSection extends StatelessWidget {
               _OutlineButton(
                 text: "Email",
                 icon: Icons.mail,
-                onTap: () => _launch("mailto:${controller.email}"),
+                onTap: () => _launch(
+                    "https://mail.google.com/mail/?view=cm&fs=1&to=${controller.email}"),
               ),
             ],
           ),
@@ -115,7 +109,6 @@ class HeaderSection extends StatelessWidget {
   }
 }
 
-
 class _ProfileDecoration extends StatelessWidget {
   const _ProfileDecoration();
 
@@ -125,29 +118,54 @@ class _ProfileDecoration extends StatelessWidget {
       duration: const Duration(milliseconds: 1000),
       child: Center(
         child: Container(
-          width: 280,
-          height: 280,
+          width: 520,
+          height: 620,
+          padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
             gradient: const LinearGradient(
               colors: [
                 Color(0xFF9B59B6),
                 Color(0xFFE91E8C),
               ],
             ),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(80),
+              bottomRight: Radius.circular(80),
+              topRight: Radius.circular(28),
+              bottomLeft: Radius.circular(28),
+            ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFE91E8C).withOpacity(0.4),
-                blurRadius: 40,
-                spreadRadius: 5,
-              )
+                color: const Color(0xFFE91E8C).withOpacity(0.20),
+                blurRadius: 45,
+                spreadRadius: 4,
+              ),
             ],
           ),
-          child: const Center(
-            child: Icon(
-              Icons.person,
-              size: 120,
-              color: Colors.white,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(74),
+                bottomRight: Radius.circular(74),
+                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(74),
+                bottomRight: Radius.circular(74),
+                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+              child: Image.asset(
+                "images/profile.jpg",
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
+                isAntiAlias: true,
+                alignment: Alignment.topCenter,
+              ),
             ),
           ),
         ),
@@ -155,7 +173,6 @@ class _ProfileDecoration extends StatelessWidget {
     );
   }
 }
-
 
 class _GradientButton extends StatelessWidget {
   final String text;
@@ -198,7 +215,6 @@ class _GradientButton extends StatelessWidget {
     );
   }
 }
-
 
 class _OutlineButton extends StatelessWidget {
   final String text;

@@ -25,4 +25,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/imagem.png
+    - assets/images/profile.jpg
+    - assets/images/chatInterativo.png
+    - assets/images/cardapiodigital.png
+    - assets/images/appdePedido.png
+    - assets/images/kasa.png
+    - assets/images/saudedamulher.jpeg
+    - assets/images/mapaInterativo.png
+    - assets/images/urnaeleitoral.png
+    - assets/images/audioBook.png

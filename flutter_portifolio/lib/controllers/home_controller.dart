@@ -15,16 +15,23 @@ class HomeController extends ChangeNotifier {
   final GlobalKey educationKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
 
+  HomeController() {
+    scrollController.addListener(_onScroll);
+  }
+
   int _activeMenu = 0;
   int get activeMenu => _activeMenu;
 
   void setActiveMenu(int index) {
+    if (_activeMenu == index) return;
+
     _activeMenu = index;
     notifyListeners();
   }
 
   void scrollToSection(GlobalKey key) {
     final context = key.currentContext;
+
     if (context != null) {
       Scrollable.ensureVisible(
         context,
@@ -34,9 +41,39 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  // =============================
-  // DADOS TIPADOS ✅
-  // =============================
+  void _onScroll() {
+    final sections = [
+      headerKey,
+      skillsKey,
+      experienceKey,
+      projectsKey,
+      educationKey,
+      contactKey,
+    ];
+
+    int currentIndex = _activeMenu;
+    double closestDistance = double.infinity;
+
+    for (int i = 0; i < sections.length; i++) {
+      final context = sections[i].currentContext;
+
+      if (context == null) continue;
+
+      final renderObject = context.findRenderObject();
+
+      if (renderObject is! RenderBox) continue;
+
+      final position = renderObject.localToGlobal(Offset.zero).dy;
+      final distance = (position - 160).abs();
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        currentIndex = i;
+      }
+    }
+
+    setActiveMenu(currentIndex);
+  }
 
   String get name => PortfolioData.name;
   String get role => PortfolioData.role;
@@ -55,6 +92,7 @@ class HomeController extends ChangeNotifier {
 
   @override
   void dispose() {
+    scrollController.removeListener(_onScroll);
     scrollController.dispose();
     super.dispose();
   }

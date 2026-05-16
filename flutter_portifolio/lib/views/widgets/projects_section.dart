@@ -51,7 +51,7 @@ class ProjectsSection extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: 26,
               mainAxisSpacing: 26,
-              childAspectRatio: width < 700 ? 0.9 : 0.82,
+              childAspectRatio: width < 700 ? 0.78 : 1.0,
             ),
             itemBuilder: (context, index) {
               final project = controller.projects[index];
@@ -63,7 +63,7 @@ class ProjectsSection extends StatelessWidget {
                   description: project.description,
                   tech: project.tech,
                   link: project.link,
-                  imagePath: _getProjectImage(project.title),
+                  imagePath: project.image,
                 ),
               );
             },
@@ -72,35 +72,6 @@ class ProjectsSection extends StatelessWidget {
       ),
     );
   }
-
-  static String _getProjectImage(String title) {
-    return "assets/images/imagem.png";
-  }
-
-  /*
-  static String _getProjectImage(String title) {
-    if (title.contains("Validação")) {
-      return "assets/projects/validacao_vendas.png";
-    }
-
-    if (title.contains("Saúde")) {
-      return "assets/projects/saude_feminina.png";
-    }
-
-    if (title.contains("Cardápio")) {
-      return "assets/projects/cardapio_digital.png";
-    }
-
-    if (title.contains("Chat")) {
-      return "assets/projects/chat_interativo.png";
-    }
-
-    if (title.contains("Pedidos")) {
-      return "assets/projects/app_pedidos.png";
-    }
-
-    return "";
-  }*/
 }
 
 class _ProjectCard extends StatefulWidget {
@@ -284,14 +255,18 @@ class _ProjectImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 185,
+    return Container(
+      height: 210,
       width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      color: const Color(0xFF0F1020),
       child: imagePath.isEmpty
           ? _Placeholder(title: title)
           : Image.asset(
               imagePath,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
+              alignment: Alignment.center,
+              filterQuality: FilterQuality.high,
               errorBuilder: (_, __, ___) {
                 return _Placeholder(title: title);
               },

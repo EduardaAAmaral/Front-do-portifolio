@@ -210,7 +210,7 @@ class _ProfileDecoration extends StatelessWidget {
                 bottomLeft: Radius.circular(20),
               ),
               child: Image.asset(
-                "images/profile.jpg",
+                "assets/images/profile.jpg",
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.high,
                 isAntiAlias: true,

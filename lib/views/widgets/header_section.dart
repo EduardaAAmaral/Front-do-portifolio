@@ -12,29 +12,44 @@ class HeaderSection extends StatelessWidget {
     final controller = context.watch<HomeController>();
     final width = MediaQuery.of(context).size.width;
 
+    final isMobile = width < 700;
+    final isTablet = width >= 700 && width <= 900;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 120),
-      child: width > 900
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 24 : 80,
+        vertical: isMobile ? 60 : 120,
+      ),
+      child: width > 1100
           ? Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(child: _buildTextContent(controller)),
+                Expanded(child: _buildTextContent(context, controller)),
                 const SizedBox(width: 40),
                 const Expanded(child: _ProfileDecoration()),
               ],
             )
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildTextContent(controller),
-                const SizedBox(height: 40),
-                const _ProfileDecoration(),
+                _buildTextContent(context, controller),
+                SizedBox(height: isMobile ? 32 : 40),
+                Center(
+                  child: _ProfileDecoration(
+                    width: isMobile ? 300 : 420,
+                    height: isMobile ? 380 : 520,
+                  ),
+                ),
               ],
             ),
     );
   }
 
-  Widget _buildTextContent(HomeController controller) {
+  Widget _buildTextContent(BuildContext context, HomeController controller) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 700;
+
     return FadeInLeft(
       duration: const Duration(milliseconds: 800),
       child: Column(
@@ -49,8 +64,8 @@ class HeaderSection extends StatelessWidget {
             ).createShader(bounds),
             child: Text(
               controller.name,
-              style: const TextStyle(
-                fontSize: 48,
+              style: TextStyle(
+                fontSize: isMobile ? 34 : 48,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -59,43 +74,72 @@ class HeaderSection extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             controller.role,
-            style: const TextStyle(
-              fontSize: 22,
-              color: Color(0xFF8892A4),
+            style: TextStyle(
+              fontSize: isMobile ? 18 : 22,
+              color: const Color(0xFF8892A4),
             ),
           ),
           const SizedBox(height: 30),
           Text(
             controller.summary,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: isMobile ? 15 : 16,
               height: 1.6,
               color: Colors.white70,
             ),
           ),
           const SizedBox(height: 40),
-          Row(
-            children: [
-              _GradientButton(
-                text: "GitHub",
-                icon: Icons.code,
-                onTap: () => _launch(controller.github),
-              ),
-              const SizedBox(width: 20),
-              _GradientButton(
-                text: "LinkedIn",
-                icon: Icons.work,
-                onTap: () => _launch(controller.linkedin),
-              ),
-              const SizedBox(width: 20),
-              _OutlineButton(
-                text: "Email",
-                icon: Icons.mail,
-                onTap: () => _launch(
-                    "https://mail.google.com/mail/?view=cm&fs=1&to=${controller.email}"),
-              ),
-            ],
-          ),
+
+          // BOTÕES RESPONSIVOS
+          if (isMobile)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _GradientButton(
+                  text: "GitHub",
+                  icon: Icons.code,
+                  onTap: () => _launch(controller.github),
+                ),
+                const SizedBox(height: 14),
+                _GradientButton(
+                  text: "LinkedIn",
+                  icon: Icons.work,
+                  onTap: () => _launch(controller.linkedin),
+                ),
+                const SizedBox(height: 14),
+                _OutlineButton(
+                  text: "Email",
+                  icon: Icons.mail,
+                  onTap: () => _launch(
+                    "https://mail.google.com/mail/?view=cm&fs=1&to=${controller.email}",
+                  ),
+                ),
+              ],
+            )
+          else
+            Row(
+              children: [
+                _GradientButton(
+                  text: "GitHub",
+                  icon: Icons.code,
+                  onTap: () => _launch(controller.github),
+                ),
+                const SizedBox(width: 20),
+                _GradientButton(
+                  text: "LinkedIn",
+                  icon: Icons.work,
+                  onTap: () => _launch(controller.linkedin),
+                ),
+                const SizedBox(width: 20),
+                _OutlineButton(
+                  text: "Email",
+                  icon: Icons.mail,
+                  onTap: () => _launch(
+                    "https://mail.google.com/mail/?view=cm&fs=1&to=${controller.email}",
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -110,7 +154,13 @@ class HeaderSection extends StatelessWidget {
 }
 
 class _ProfileDecoration extends StatelessWidget {
-  const _ProfileDecoration();
+  final double width;
+  final double height;
+
+  const _ProfileDecoration({
+    this.width = 520,
+    this.height = 620,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +168,8 @@ class _ProfileDecoration extends StatelessWidget {
       duration: const Duration(milliseconds: 1000),
       child: Center(
         child: Container(
-          width: 520,
-          height: 620,
+          width: width,
+          height: height,
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
@@ -191,6 +241,7 @@ class _GradientButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
+        constraints: const BoxConstraints(minWidth: 120),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -202,6 +253,8 @@ class _GradientButton extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 18, color: Colors.white),
             const SizedBox(width: 8),
@@ -233,6 +286,7 @@ class _OutlineButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
+        constraints: const BoxConstraints(minWidth: 120),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -241,6 +295,8 @@ class _OutlineButton extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 18, color: Colors.white),
             const SizedBox(width: 8),

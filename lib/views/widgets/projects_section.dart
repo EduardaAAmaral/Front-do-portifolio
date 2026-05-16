@@ -13,22 +13,30 @@ class ProjectsSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     int crossAxisCount = 3;
-    if (width < 1200) crossAxisCount = 2;
-    if (width < 700) crossAxisCount = 1;
+    if (width < 1250) crossAxisCount = 2;
+    if (width < 780) crossAxisCount = 1;
+
+    final double horizontalPadding = width < 700 ? 24 : 80;
+
+    final double cardHeight = width < 780
+        ? 500
+        : width < 1250
+            ? 455
+            : 430;
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: width < 700 ? 24 : 80,
-        vertical: 100,
+        horizontal: horizontalPadding,
+        vertical: width < 700 ? 70 : 100,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Projetos",
             style: TextStyle(
-              fontSize: 38,
+              fontSize: width < 700 ? 32 : 38,
               fontWeight: FontWeight.w800,
               color: Colors.white,
             ),
@@ -51,7 +59,7 @@ class ProjectsSection extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: 26,
               mainAxisSpacing: 26,
-              childAspectRatio: width < 700 ? 0.78 : 1.0,
+              mainAxisExtent: cardHeight,
             ),
             itemBuilder: (context, index) {
               final project = controller.projects[index];
@@ -98,6 +106,8 @@ class _ProjectCardState extends State<_ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
@@ -105,7 +115,7 @@ class _ProjectCardState extends State<_ProjectCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         transform:
-            isHovered ? (Matrix4.identity()..scale(1.025)) : Matrix4.identity(),
+            isHovered ? (Matrix4.identity()..scale(1.01)) : Matrix4.identity(),
         decoration: BoxDecoration(
           color: const Color(0xFF151528),
           borderRadius: BorderRadius.circular(26),
@@ -117,10 +127,10 @@ class _ProjectCardState extends State<_ProjectCard> {
           boxShadow: [
             BoxShadow(
               color: isHovered
-                  ? const Color(0xFFE91E8C).withOpacity(0.28)
-                  : Colors.black.withOpacity(0.25),
-              blurRadius: isHovered ? 35 : 22,
-              offset: const Offset(0, 14),
+                  ? const Color(0xFFE91E8C).withOpacity(0.22)
+                  : Colors.black.withOpacity(0.22),
+              blurRadius: isHovered ? 28 : 18,
+              offset: const Offset(0, 10),
             ),
           ],
         ),
@@ -135,7 +145,7 @@ class _ProjectCardState extends State<_ProjectCard> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(22),
+                  padding: EdgeInsets.all(width < 700 ? 18 : 22),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -143,26 +153,24 @@ class _ProjectCardState extends State<_ProjectCard> {
                         widget.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: TextStyle(
+                          fontSize: width < 700 ? 18 : 20,
                           fontWeight: FontWeight.w800,
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child: Text(
-                          widget.description,
-                          maxLines: 4,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            height: 1.6,
-                            color: Colors.white70,
-                          ),
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.description,
+                        maxLines: width < 700 ? 4 : 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          height: 1.45,
+                          color: Colors.white70,
                         ),
                       ),
-                      const SizedBox(height: 18),
+                      const Spacer(),
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -191,7 +199,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                           );
                         }).toList(),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       InkWell(
                         onTap: () => _launch(widget.link),
                         borderRadius: BorderRadius.circular(30),
@@ -255,8 +263,16 @@ class _ProjectImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    final imageHeight = width < 780
+        ? 175.0
+        : width < 1250
+            ? 170.0
+            : 185.0;
+
     return Container(
-      height: 210,
+      height: imageHeight,
       width: double.infinity,
       padding: const EdgeInsets.all(12),
       color: const Color(0xFF0F1020),

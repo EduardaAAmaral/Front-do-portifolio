@@ -169,7 +169,7 @@ class PortfolioData {
           "com foco em acessibilidade, usabilidade e experiência do usuário.",
       link: "https://github.com/EduardaAAmaral/AudioBook",
       tech: ["JavaScript", "HTML", "CSS"],
-      image: "assets/images/audiobook.png",
+      image: "assets/images/audioBook.png",
     ),
     Project(
       title: "Urna Eletrônica",

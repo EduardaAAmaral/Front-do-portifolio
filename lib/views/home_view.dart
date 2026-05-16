@@ -14,12 +14,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<HomeController>();
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 700;
 
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
       body: Row(
         children: [
-          _SideMenu(controller: controller),
+          if (!isMobile) _SideMenu(controller: controller),
           Expanded(
             child: SingleChildScrollView(
               controller: controller.scrollController,
